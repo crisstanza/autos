@@ -21,6 +21,23 @@ if (!io.github.crisstanza.Autos) io.github.crisstanza.Autos = {};
 		return elements;
 	};
 
+	io.github.crisstanza.Autos.initNames = function() {
+		let elements = document.querySelectorAll('[name]:not([name=""])');
+		if (elements) {
+			let length = elements.length;
+			for (let i = 0 ; i < length ; i++) {
+				let element = elements[i];
+				let name = element.getAttribute('name');
+				let identifier = fixId(name);
+				if (!window[identifier]) {
+					window[identifier] = [];
+				}
+				window[identifier].push(element);
+			}
+		}
+		return elements;
+	};
+
 	function fixId(id) {
 		let parts = id.split('-');
 		let length = parts.length;
@@ -36,6 +53,7 @@ if (!io.github.crisstanza.Autos) io.github.crisstanza.Autos = {};
 
 	function init(event) {
 		io.github.crisstanza.Autos.initIds();
+		io.github.crisstanza.Autos.initNames();
 	}
 
 	window.addEventListener('load', init);
