@@ -38,8 +38,8 @@ if (!io.github.crisstanza.Autos) io.github.crisstanza.Autos = {};
 		return elements;
 	};
 
-	function fixId(id) {
-		let parts = id.split('-');
+	function fixId(str) {
+		let parts = str.split('-');
 		let length = parts.length;
 		for (let i = 0 ; i < length ; i++) {
 			let part = parts[i];
@@ -51,9 +51,22 @@ if (!io.github.crisstanza.Autos) io.github.crisstanza.Autos = {};
 		return identifier;
 	}
 
+	function firstUppercase(str) {
+		return str.charAt(0).toUpperCase() + str.slice(1);
+	}
+
 	function init(event) {
-		io.github.crisstanza.Autos.initIds();
-		io.github.crisstanza.Autos.initNames();
+		let autos = document.body.getAttribute('data-autos');
+		if (autos) {
+			let parts = autos.split(', ');
+			let length = parts.length;
+			for (let i = 0 ; i < length ; i++) {
+				let part = parts[i];
+				let identifier = firstUppercase(part);
+				let js = 'io.github.crisstanza.Autos.init'+identifier+'();';
+				eval(js);
+			}
+		}
 	}
 
 	window.addEventListener('load', init);
