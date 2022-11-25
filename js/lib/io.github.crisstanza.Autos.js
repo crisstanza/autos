@@ -8,13 +8,13 @@ if (!io.github.crisstanza.Autos) io.github.crisstanza.Autos = {};
 (function() {
 
 	io.github.crisstanza.Autos.initIds = function() {
-		let elements = document.querySelectorAll('[id]:not([id=""])');
+		const elements = document.querySelectorAll('[id]:not([id=""])');
 		if (elements) {
-			let length = elements.length;
+			const length = elements.length;
 			for (let i = 0 ; i < length ; i++) {
-				let element = elements[i];
-				let id = element.getAttribute('id');
-				let identifier = fixId(id);
+				const element = elements[i];
+				const id = element.getAttribute('id');
+				const identifier = fixId(id);
 				window[identifier] = element;
 			}
 		}
@@ -22,13 +22,13 @@ if (!io.github.crisstanza.Autos) io.github.crisstanza.Autos = {};
 	};
 
 	io.github.crisstanza.Autos.initNames = function() {
-		let elements = document.querySelectorAll('[name]:not([name=""])');
+		const elements = document.querySelectorAll('[name]:not([name=""])');
 		if (elements) {
-			let length = elements.length;
+			const length = elements.length;
 			for (let i = 0 ; i < length ; i++) {
-				let element = elements[i];
-				let name = element.getAttribute('name');
-				let identifier = fixId(name);
+				const element = elements[i];
+				const name = element.getAttribute('name');
+				const identifier = fixId(name);
 				if (!window[identifier]) {
 					window[identifier] = [];
 				}
@@ -39,14 +39,14 @@ if (!io.github.crisstanza.Autos) io.github.crisstanza.Autos = {};
 	};
 
 	io.github.crisstanza.Autos.initRadios = function(obj) {
-		let elements = document.querySelectorAll('input[type="radio"][name]:not([name=""])');
+		const elements = document.querySelectorAll('input[type="radio"][name]:not([name=""])');
 		if (elements) {
-			let parent = obj ? 'obj.' : '';
-			let length = elements.length;
+			const parent = obj ? 'obj.' : '';
+			const length = elements.length;
 			for (let i = 0 ; i < length ; i++) {
-				let element = elements[i];
-				let name = element.getAttribute('name');
-				let identifier = fixId(name);
+				const element = elements[i];
+				const name = element.getAttribute('name');
+				const identifier = fixId(name);
 				element.addEventListener('click', function(event) {
 					eval(parent+identifier+'_OnClick(event)');
 				});
@@ -56,14 +56,14 @@ if (!io.github.crisstanza.Autos) io.github.crisstanza.Autos = {};
 	};
 
 	io.github.crisstanza.Autos.initChecks = function(obj) {
-		let elements = document.querySelectorAll('input[type="checkbox"][name]:not([name=""])');
+		const elements = document.querySelectorAll('input[type="checkbox"][name]:not([name=""])');
 		if (elements) {
-			let parent = obj ? 'obj.' : '';
-			let length = elements.length;
+			const parent = obj ? 'obj.' : '';
+			const length = elements.length;
 			for (let i = 0 ; i < length ; i++) {
-				let element = elements[i];
-				let name = element.getAttribute('name');
-				let identifier = fixId(name);
+				const element = elements[i];
+				const name = element.getAttribute('name');
+				const identifier = fixId(name);
 				element.addEventListener('click', function(event) {
 					eval(parent+identifier+'_OnClick(event)');
 				});
@@ -73,15 +73,15 @@ if (!io.github.crisstanza.Autos) io.github.crisstanza.Autos = {};
 	};
 
 	function fixId(str) {
-		let parts = str.split('-');
-		let length = parts.length;
+		const parts = str.split('-');
+		const length = parts.length;
 		for (let i = 0 ; i < length ; i++) {
-			let part = parts[i];
+			const part = parts[i];
 			if (i > 0) {
 				parts[i] = part.charAt(0).toUpperCase() + part.slice(1);
 			}
 		}
-		let identifier = parts.join('');
+		const identifier = parts.join('');
 		return identifier;
 	}
 
@@ -90,14 +90,14 @@ if (!io.github.crisstanza.Autos) io.github.crisstanza.Autos = {};
 	}
 
 	function init(event) {
-		let autos = document.body.getAttribute('data-autos');
+		const autos = document.body.getAttribute('data-autos');
 		if (autos) {
-			let parts = autos.split(', ');
-			let length = parts.length;
+			const parts = autos.split(', ');
+			const length = parts.length;
 			for (let i = 0 ; i < length ; i++) {
-				let part = parts[i];
-				let identifier = firstUppercase(part);
-				let js = 'io.github.crisstanza.Autos.init'+identifier+'();';
+				const part = parts[i];
+				const identifier = firstUppercase(part);
+				const js = 'io.github.crisstanza.Autos.init'+identifier+'();';
 				eval(js);
 			}
 		}
